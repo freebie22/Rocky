@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Rocky.Migrations
+namespace Rocky_DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRequiredFields : Migration
+    public partial class AddFullNameToUsersTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

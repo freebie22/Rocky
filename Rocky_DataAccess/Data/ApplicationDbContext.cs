@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Rocky_Models;
 using System.Security.Permissions;
 
-namespace Rocky.Data
+namespace Rocky_DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext
     {

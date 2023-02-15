@@ -2,16 +2,16 @@
 
 #nullable disable
 
-namespace Rocky.Migrations
+namespace Rocky_DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addedTestModelToDb : Migration
+    public partial class AddApplicationType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TestModel",
+                name: "ApplicationType",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -20,7 +20,7 @@ namespace Rocky.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TestModel", x => x.Id);
+                    table.PrimaryKey("PK_ApplicationType", x => x.Id);
                 });
         }
 
@@ -28,7 +28,7 @@ namespace Rocky.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TestModel");
+                name: "ApplicationType");
         }
     }
 }
