@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rocky.Data;
-using Rocky.Models;
+using Rocky_Models;
 using Rocky_Utility;
-using Rocky.Models.ViewModels;
+using Rocky_Models.ViewModels;
 using System.Diagnostics;
 
 namespace Rocky.Controllers
