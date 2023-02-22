@@ -9,5 +9,8 @@
         public const string CustomerRole = "Customer";
 
         public const string EmailAdmin = "bojkov755@gmail.com";
+
+        public const string CategoryName = "Category";
+        public const string ApplicationTypeName = "ApplicationType";
     }
 }
