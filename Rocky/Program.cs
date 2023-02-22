@@ -16,6 +16,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProvid
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
 builder.Services.AddSession(Options =>
 {
     Options.IdleTimeout = TimeSpan.FromMinutes(10);
