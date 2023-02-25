@@ -8,106 +8,21 @@ using System.Data;
 
 namespace Rocky.Controllers
 {
-    [Authorize(Roles = WC.AdminRole)]
-    public class ApplicationTypeController : Controller
+    
+    public class InquiryController : Controller
     {
-        private readonly IApplicationTypeRepository _appTypeRepo;
+        private readonly IInquiryDetailRepository _inqDRepo;
+        private readonly IInquiryHeaderRepository _inqHRepo;
 
-        public ApplicationTypeController(IApplicationTypeRepository appTypeRepo)
+        public InquiryController(IInquiryDetailRepository inqDRepo, IInquiryHeaderRepository inqHRepo)
         {
-            _appTypeRepo = appTypeRepo;
+            _inqDRepo = inqDRepo;
+            _inqHRepo = inqHRepo;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<ApplicationType> objList = _appTypeRepo.GetAll();
-            return View(objList);
-        }
-
-        public IActionResult Create()
-        {
             return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult>Create(ApplicationType obj)
-        {
-            if(ModelState.IsValid)
-            {
-                await Task.Run(() => {
-                    _appTypeRepo.Add(obj);
-                    _appTypeRepo.Save();
-                    
-                });
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
-
-        public IActionResult Edit(int? id)
-        {
-            if(id == null || id ==0) 
-            {
-                return NotFound();
-            }
-
-            var obj = _appTypeRepo.Find(id.GetValueOrDefault());
-
-            if(obj == null) {
-                return NotFound();
-            }
-
-            return View(obj);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ApplicationType obj)
-        {
-            if (ModelState.IsValid)
-            {
-                await Task.Run(() => {
-                    _appTypeRepo.Update(obj);
-                    _appTypeRepo.Save(); 
-                });
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
-
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var obj = _appTypeRepo.Find(id.GetValueOrDefault());
-
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            return View(obj);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(int? id)
-        {
-            var obj = _appTypeRepo.Find(id.GetValueOrDefault());
-            if (obj == null) {
-                return NotFound();
-            }
-
-            _appTypeRepo.Remove(obj);
-            _appTypeRepo.Save();
-
-            return RedirectToAction("Index");
-
-        }
-
     }
 }

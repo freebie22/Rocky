@@ -140,10 +140,10 @@ namespace Rocky.Controllers
                     ProductId = prod.Id
                 };
                 _inqDRepo.Add(inquiryDetail);
-                _inqDRepo.Save();
+                
             }
-
-                return RedirectToAction(nameof(InquiryConfirmation));
+            _inqDRepo.Save();
+            return RedirectToAction(nameof(InquiryConfirmation));
         }
 
         public IActionResult InquiryConfirmation()
