@@ -17,6 +17,14 @@
         public const string Success = "Success";
         public const string Error = "Error";
 
+        public const string StatusPending = "Pending";
+        public const string StatusApproved = "Approved";
+        public const string StatusInProcess = "Proccesing";
+        public const string StatusShipped = "Shipped";
+        public const string StatusCancelled = "Cancelled";
+        public const string StatusRefunded = "Refunded";
+
+
 
     }
 }

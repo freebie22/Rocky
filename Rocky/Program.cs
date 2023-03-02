@@ -6,6 +6,8 @@ using Rocky_DataAccess.Repository;
 using Rocky_DataAccess.Repository.IRepository;
 using Rocky_Models;
 using Rocky_Utility;
+using Rocky_Utility.BrainTree;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddDefaultUI().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<BrainTreeSettings>(builder.Configuration.GetSection("BrainTree"));
+builder.Services.AddSingleton<IBrainTreeGate, BrainTreeGate>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
