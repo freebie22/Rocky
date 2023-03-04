@@ -27,6 +27,12 @@ builder.Services.AddScoped<IInquiryDetailRepository, InquiryDetailRepository>();
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
 builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddAuthentication().AddFacebook(Options =>
+{
+    Options.AppId = "693871042479257";
+    Options.AppSecret = "0ad6a3915acb9c3f13a4fd37022e9002";
+
+});
 builder.Services.AddSession(Options =>
 {
     Options.IdleTimeout = TimeSpan.FromMinutes(10);
