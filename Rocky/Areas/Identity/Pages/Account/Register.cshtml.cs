@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
 using Rocky_Models;
 using Rocky_Utility;
 
@@ -102,8 +103,9 @@ namespace Rocky.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
+            [Required]
             public string FullName { get; set; }
+            [Required]
             public string PhoneNumber { get; set; }
         }
 
@@ -143,7 +145,6 @@ namespace Rocky.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user,WC.CustomerRole);
                     }
-                    await _userManager.AddToRoleAsync(user, WC.AdminRole);
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -166,13 +167,15 @@ namespace Rocky.Areas.Identity.Pages.Account
                     {
                         if(!User.IsInRole(WC.AdminRole))
                         {
-                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            TempData[WC.Success] = user.FullName + " has been registered";
+                            return RedirectToAction("Index", "Home");   
                         }
                         else
                         {
-                            return RedirectToAction("Index");
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
                         }
-                        return LocalRedirect(returnUrl);
+                       
                     }
                 }
                 foreach (var error in result.Errors)
